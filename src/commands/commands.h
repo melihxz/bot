@@ -10,50 +10,50 @@ namespace cmd
 {
     /**
      * @brief Replies with a question in the chat to change the topic
-     * @param bot
-     * @param slashcommand event
+     * @param bot cluster
+     * @param event slash command event
      */
     void topicCommand(dpp::cluster& bot, const dpp::slashcommand_t& event);
 
     /**
      * @brief Replies with a C++ related coding question
-     * @param bot
-     * @param slashcommand event
+     * @param bot cluster
+     * @param event slash command event
      */
     void codingCommand(dpp::cluster& bot, const dpp::slashcommand_t& event);
 
     /**
      * @brief Closes a forum post
-     * @param bot
-     * @param slashcommand event
+     * @param bot cluster
+     * @param event slash command event
      */
     void closeCommand(dpp::cluster& bot, const dpp::slashcommand_t& event);
 
     /**
      * @brief Opens a ticket
-     * @param bot
-     * @param slashcommand event
+     * @param bot cluster
+     * @param event slash command event
      */
     void ticketCommand(dpp::cluster& bot, const dpp::slashcommand_t& event);
 
     /**
      * @brief Instruction: Formatting C++ Code on Discord
-     * @param bot
-     * @param slashcommand event
+     * @param bot cluster
+     * @param event slash command event
      */
     void codeCommand(dpp::cluster& bot, const dpp::slashcommand_t& event);
 
     /**
-    * @brief Replies with a coding project idea
-    * @param bot
-    * @param slashcommand event
+     * @brief Replies with a coding project idea
+     * @param bot cluster
+     * @param event slash command event
      */
     void projectCommand(dpp::cluster& bot, const dpp::slashcommand_t& event);
 
     /**
-    * @brief Replies with the rules
-    * @param bot
-    * @param slashcommand event
+     * @brief Replies with the rules
+     * @param bot cluster
+     * @param event slash command event
      */
     void ruleCommand(dpp::cluster& bot, const dpp::slashcommand_t& event);
 

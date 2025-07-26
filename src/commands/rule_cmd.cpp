@@ -9,7 +9,7 @@
 
 void cmd::ruleCommand(dpp::cluster& bot, const dpp::slashcommand_t& event)
 {
-    std::vector<std::string> rules = {
+    const std::vector<std::string> rules = {
         "Follow Discord's Terms of Service: Adhere to Discord's Terms of Service (ToS) and Community Guidelines.",
         "Be respectful: Treat others with kindness, respect, and patience. Avoid harassment, personal attacks, or any form of offensive behavior.",
         "Stay on topic: Keep discussions focused on C++ coding and related topics. Avoid excessive off-topic conversations that may disrupt the flow of the server.",
@@ -22,7 +22,7 @@ void cmd::ruleCommand(dpp::cluster& bot, const dpp::slashcommand_t& event)
         "Do not copy and paste answers from ChatGPT or similar AI tools."
     };
 
-    dpp::command_interaction cmdData = event.command.get_command_interaction();
+    const dpp::command_interaction cmdData = event.command.get_command_interaction();
     if (cmdData.options.empty())
         return event.reply(dpp::message("Please follow our <#" + globals::channel::rulesId.str() + ">."));
 
@@ -36,10 +36,10 @@ void cmd::ruleCommand(dpp::cluster& bot, const dpp::slashcommand_t& event)
     if ((index < 1 || index > rules.size()))
         return event.reply(dpp::message("Rule number " + std::to_string(index) + " does not exist. Visit <#" + globals::channel::rulesId.str() + "> to see all available rules.").set_flags(dpp::m_ephemeral));
 
-    const std::string rule = rules.at(index-1);
+    const std::string& rule = rules.at(index-1);
     const dpp::embed embed = dpp::embed()
         .set_color(globals::color::defaultColor)
         .add_field("Rule " + std::to_string(index), rule);
-    dpp::message message(event.command.channel_id, embed);
+    const dpp::message message(event.command.channel_id, embed);
     event.reply(message);
 }

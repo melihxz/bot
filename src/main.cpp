@@ -34,16 +34,16 @@ int main()
             std::vector<dpp::slashcommand> slashcommands;
             for (const auto& item : cmdList)
             {
-                dpp::slashcommand slashcommand;
-                slashcommand.set_name(item.name);
-                slashcommand.set_description(item.desc);
-                slashcommand.set_application_id(bot.me.id);
+                dpp::slashcommand slashCommand;
+                slashCommand.set_name(item.name);
+                slashCommand.set_description(item.desc);
+                slashCommand.set_application_id(bot.me.id);
 
-                for (dpp::command_option arg : item.args)
+                for (const dpp::command_option& arg : item.args)
                 {
-                    slashcommand.add_option(arg);
+                    slashCommand.add_option(arg);
                 }
-                slashcommands.push_back(slashcommand);
+                slashcommands.push_back(slashCommand);
             }
             bot.global_bulk_command_create(slashcommands);
         }
@@ -68,7 +68,7 @@ int main()
     });
 
     bot.on_button_click([&bot](const dpp::button_click_t& event) {
-        if (event.custom_id == "delSugguestion")
+        if (event.custom_id == "delSuggestion")
             utils::suggestion::deleteSuggestion(bot, event);
         else if (event.custom_id == "editSuggestion")
             utils::suggestion::editSuggestion(bot, event);

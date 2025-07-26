@@ -20,7 +20,7 @@ void utils::suggestion::createSuggestion(dpp::cluster& bot, const dpp::message_c
                 .set_label("Delete")
                 .set_type(dpp::cot_button)
                 .set_style(dpp::cos_danger)
-                .set_id("delSugguestion")
+                .set_id("delSuggestion")
             )
         );
 
@@ -37,10 +37,26 @@ void utils::suggestion::createSuggestion(dpp::cluster& bot, const dpp::message_c
         bot.message_create(msg, [&bot](const dpp::confirmation_callback_t& callback) {
             if (!callback.is_error())
             {
-                dpp::message msg = std::get<dpp::message>(callback.value);
-                
-                bot.message_add_reaction(msg.id, msg.channel_id, dpp::find_emoji(globals::emoji::yes)->format());
-                bot.message_add_reaction(msg.id, msg.channel_id, dpp::find_emoji(globals::emoji::no)->format());
+                const dpp::message msg = std::get<dpp::message>(callback.value);
+
+                const auto yesEmoji = dpp::find_emoji(globals::emoji::yes);
+                const auto noEmoji = dpp::find_emoji(globals::emoji::no);
+
+                if (yesEmoji && noEmoji)
+                {
+                    bot.message_add_reaction(msg.id, msg.channel_id, yesEmoji->format(), [&bot, &msg, &noEmoji](const dpp::confirmation_callback_t& reactionCallback) {
+                        if (!reactionCallback.is_error())
+                            bot.message_add_reaction(msg.id, msg.channel_id, noEmoji->format());
+                    });
+                }
+                else
+                {
+                    // fallback
+                    bot.message_add_reaction(msg.id, msg.channel_id, "👍", [&bot, &msg](const dpp::confirmation_callback_t& reactionCallback) {
+                        if (!reactionCallback.is_error())
+                            bot.message_add_reaction(msg.id, msg.channel_id, "👎");
+                    });
+                }
             }
         });
         bot.message_delete(event.msg.id, event.msg.channel_id);

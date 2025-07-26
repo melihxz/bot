@@ -48,7 +48,7 @@ void cmd::projectCommand(dpp::cluster& bot, const dpp::slashcommand_t& event)
     const std::string projectDescription = project["description"];
     const std::string projectHint = project.contains("hint") ? project["hint"] : "No hint available.";
 
-    dpp::embed embed = dpp::embed()
+    const dpp::embed embed = dpp::embed()
         .set_color(globals::color::defaultColor)
         .add_field("Project Idea", projectTitle)
         .add_field("Description", projectDescription);
@@ -68,7 +68,7 @@ void cmd::projectCommand(dpp::cluster& bot, const dpp::slashcommand_t& event)
 
     event.reply(message);
 
-    bot.on_button_click([&bot, &data](const dpp::button_click_t& event) {
+    bot.on_button_click([&bot](const dpp::button_click_t& event) {
         // Ignore if button id does not start with hint_button_
         if (event.custom_id.rfind("hint_button_", 0) != 0)
             return;

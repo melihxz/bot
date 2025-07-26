@@ -13,8 +13,7 @@ std::string cmd::utils::readFileLine(const std::string& path, int &index)
         for (int i = 0; std::getline(file, line) && i < index; i++);
 
         // validate next line
-        std::string next;
-        if (!getline(file, next) || line.length() == 0)
+        if (std::string next; !getline(file, next) || line.length() == 0)
             index = 0;
         else
             index++;

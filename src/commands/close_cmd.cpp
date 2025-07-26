@@ -28,11 +28,11 @@ void cmd::closeCommand(dpp::cluster& bot, const dpp::slashcommand_t& event)
                 if (callback2.is_error())
                     return event.reply(dpp::message("[!] Unable to close post.").set_flags(dpp::m_ephemeral));
 
-                dpp::embed embed = dpp::embed()
+                const dpp::embed embed = dpp::embed()
                     .set_color(globals::color::defaultColor)
                     .add_field("Closed post!", "");
 
-                dpp::message message(event.command.channel_id, embed);
+                const dpp::message message(event.command.channel_id, embed);
                 event.reply(message);
             });
         });
